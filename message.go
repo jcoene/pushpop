@@ -10,18 +10,18 @@ import (
 type State uint16
 
 const (
-	// State_READY:	  	The message is enqueued and ready for processing.
+	// READY: The message is enqueued and ready for processing.
 	State_READY State = 0
 
-	// State_PENDING: 	The message was popped and is in-flight with a consumer.
-	//									At this point the message is safe to delete.
+	// PENDING: The message was popped and is in-flight with a consumer.
 	State_PENDING State = 1
 
-	// State_COMPLETED: The message was popped and successfully processed.
+	// COMPLETED: The message was popped and successfully processed. At this
+	// point the message is safe to delete.
 	State_COMPLETED State = 2
 
-	// State_DISCARDED: The message was popped and otherwise processed.
-	//									At this point the message is safe to delete.
+	// DISCARDED: The message was popped and otherwise processed. At this point
+	// the message is safe to delete.
 	State_DISCARDED State = 3
 )
 
@@ -38,9 +38,9 @@ type Message struct {
 	State State
 
 	// StateTime represents a timestamp to be interpreted based on the State:
-	// State_READY:	  	The earliest time at which the message can be popped.
-	// State_PENDING: 	The deadline by which the consumer must check-in, either
-	//									completing, discarding, deferring, or extending.
+	// State_READY: The earliest time at which the message can be popped.
+	// State_PENDING: The deadline by which the consumer must check-in, either
+	// completing, discarding, deferring, or extending.
 	// State_COMPLETED: The time the message was completed.
 	// State_DISCARDED: The time the message was discarded.
 	StateTime time.Time
