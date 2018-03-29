@@ -1,0 +1,20 @@
+sudo: required
+dist: trusty
+language: go
+
+go:
+  - "1.10.1"
+
+addons:
+  postgresql: "9.6"
+
+install:
+  - go get -t
+
+before_script:
+  - psql -U postgres -c 'create database pushpop_test;'
+  - psql -U postgres -c 'create database pushpop_example;'
+
+script:
+  - make test
+  - make run-example
