@@ -9,7 +9,8 @@ addons:
   postgresql: "9.6"
 
 install:
-  - go get -t
+  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  - dep ensure
 
 before_script:
   - psql -U postgres -c 'create database pushpop_test;'
